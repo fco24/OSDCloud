@@ -22,7 +22,14 @@ Start-OSDCloud -OSLanguage en-us -OSName 'Windows 11 23H2 x64' -OSEdition Enterp
 
 #Anything I want can go right here and I can change it at any time since it is in the Cloud!!!!!
 Write-Host  -ForegroundColor Cyan "Starting OSDCloud PostAction ..."
-Write-Warning "I'm not sure of what to put here yet"
+
+Write-Warning "Injecting unattend.xml"
+$sourcePath = "$(Get-OSDCloudWorkspace)\OSDCloud\Automate\Provisioning\unattend.xml"
+$destinationPath = "C:\Windows\Panther\unattend.xml"
+
+# Copy the unattend.xml file
+Copy-Item -Path $sourcePath -Destination $destinationPath -Force
+
 
 #Restart from WinPE
 Write-Host  -ForegroundColor Cyan "Restarting in 10 seconds!"
